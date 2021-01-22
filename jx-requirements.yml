@@ -1,17 +1,27 @@
+autoUpdate:
+  enabled: false
+  schedule: ""
+bootConfigURL: https://github.com/varmas2/jenkins-x-boot-config
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  environmentGitPublic: false
-  project: ""
-  provider: gke
-  zone: ""
-gitops: true
+  clusterName: tf-jx-relative-gopher
+  devEnvApprovers:
+  - varmas2
+  environmentGitOwner: varmas2
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  project: devops-project
+  provider: eks
+  region: us-east-2
+  registry: 406246505010.dkr.ecr.us-east-2.amazonaws.com
+  zone: us-east-2
 environments:
 - key: dev
 - key: staging
 - key: production
 ingress:
-  domain: ""
+  domain: 1.2.3.4.nip.io
   externalDNS: false
   tls:
     email: ""
@@ -22,6 +32,19 @@ secretStorage: local
 storage:
   logs:
     enabled: false
+  reports:
+    enabled: false
+  repository:
+    enabled: false
+webhook: prow
+gitops: true
+secretStorage: local
+storage:
+  backup:
+    enabled: false
+    url: ""
+  logs:
+    enabled: false
     url: ""
   reports:
     enabled: false
@@ -29,7 +52,11 @@ storage:
   repository:
     enabled: false
     url: ""
+vault: {}
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: "master"
+  ref: v1.0.610
   url: https://github.com/jenkins-x/jenkins-x-versions.git
-webhook: lighthouse
+webhook: prow
